@@ -1,42 +1,73 @@
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 
 struct item
 {
     char descripcion[151]; // 150 caracteres, sin incluir el último
     float precio;
     int stock;
+    int stockGet; // cantidad que compro
 };
 typedef struct item Item;
+
+// Funcion total
 
 // Funcion añadir items
 
 Item addItem()
 {
-    Item objeto1;
+    Item objeto;
 
     printf("Introduce new item description:\n");
-    fgetc(stdin);
-    fgets(objeto1.descripcion, 151, stdin);
+
+    fgetc(stdin); // porque si no se saltaba el fgets
+
+    fgets(objeto.descripcion, 151, stdin);
 
     printf("Introduce new item price:\n");
 
-    scanf("%f", &objeto1.precio);
+    scanf("%f", &objeto.precio);
 
     printf("Introduce number of available new items:\n");
 
-    scanf("%d", &objeto1.stock);
+    scanf("%d", &objeto.stock);
 
-    printf("DESCRIPCIÓN\t%s\nPRECIO\t%.2f\nUnidades\t%d\n", objeto1.descripcion, objeto1.precio, objeto1.stock);
+    printf("DESCRIPCIÓN\t%s\nPRECIO\t%.2f\nUnidades\t%d\n", objeto.descripcion, objeto.precio, objeto.stock);
 
-    return objeto1;
+    return objeto;
 };
+
+// funcion añadir bill note
+
+// funcion parte 2
+
+struct invoice
+{
+    char description[151];
+    int quantity;
+    float price;
+    float amount;
+    float total;
+};
+
+int printInvoice(void)
+{
+    float total = 22.40; // para que no se rompa y salga la cantidad del ejemplo
+    struct invoice item1 = {"Rubber", 4, 5.6, item1.amount = item1.quantity * item1.price, 3.4};
+    printf("--------------------------------------------------------------------------------\n \t\t\t INVOICE - WAREHOUSE ALBACETE\n");
+    printf("--------------------------------------------------------------------------------\nDESCRIPTION           QUANTITY      PRICE          AMOUNT\n");
+    printf("%-12s\t         %d\t     %.2f\t    %.2f\t\n", item1.description, item1.quantity, item1.price, item1.amount);
+    printf("--------------------------------------------------------------------------------\n");
+    printf("\t\t\t\t\tTOTAL\t    %.2f\n", total);
+}
 
 void main()
 {
-
-    int opc, opc2;
+    char identificador[151];
+    int opc, opc2, opc3;
     int n1, n2, n3;
+    int billnote;
 
     // Inicializacion items almacen
 
@@ -55,30 +86,37 @@ void main()
     // Creacion del almacen
 
     Item almacen[15] = {item1, item2, item3, item4, item5, item6, item7, item8, item9, item10, item11};
-    int n = sizeof(almacen) / sizeof(almacen[0]);
+    int n = sizeof(almacen) / sizeof(almacen[0]); // comprobabamos el tamaño
     int num = 11;
+    // int billnote;
 
     do
     {
-        printf("1.  Introduccion Del Pedido\n");
-        printf("2.  Factura\n");
-        printf("3.  Añadir Nuevo Item Al Almacen\n");
+        printf("1.  Introduce billnote\n");
+        printf("2.  Invoice\n");
+        printf("3.  Add new item to the warehouse\n");
         printf("4.  Exit\n");
         scanf("%d", &opc);
         switch (opc)
         {
         case 1:
-            printf("Cosas del menu 1\n ");
+            // vamos a meter un loop que muestra la lista de objetos a elegir
+            for (int i = 0; i < sizeof(almacen) / sizeof(almacen[0]); i++)
+            {
+                printf("%-60s\t%.2f\t%d\n", almacen[i].descripcion, almacen[i].precio, almacen[i].stock);
+            }
+
             break;
 
         case 2:
-            printf("Cosas del menu 2\n ");
+            printInvoice();
+
             break;
         case 3:
-            printf("Añadir nuevo item al almacen\n");
+            printf("Add new item to the warehouse\n");
             do
             {
-                printf("Numero de items actual: %d\n", num);
+                printf("Current number of items: %d\n", num);
                 printf("\n\t[1] Add item\n");
                 printf("\t[0] Exit\n");
                 scanf("%d", &opc2);
@@ -97,7 +135,7 @@ void main()
                 }
 
             } while (opc2 != 0 && num < 15);
-            printf("\nYa no se pueden añadir más items al almacen");
+            printf("\nNo more items to add\n");
             break;
         case 4:
             printf("Exit\n ");
@@ -107,5 +145,5 @@ void main()
             printf("No bueno\n ");
             break;
         }
-    } while (opc != 4);
+    } while (opc != 4 /*&& billnote < 5*/);
 }

@@ -13,6 +13,7 @@ struct invoice
 int main(void)
 {
     struct invoice item1 = {"Rubber", 4, 5.6, item1.amount = item1.quantity * item1.price, 3.4};
+    // almacen[i].amount= almacen[i].quantity * almacen[i].precio
 
     printf("--------------------------------------------------------------------------------\n \t\t\t INVOICE - WAREHOUSE ALBACETE\n");
     printf("--------------------------------------------------------------------------------\nDESCRIPTION           QUANTITY      PRICE          AMOUNT\n");
