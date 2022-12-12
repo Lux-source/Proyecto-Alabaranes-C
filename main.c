@@ -12,8 +12,10 @@
 #include <string.h>
 
 int items = 0;
+int menu;
+int num = 13;
 
-struct introducirObjeto
+struct item
 {
     char descripcionObjeto[151]; // 150 caracteres, sin incluir el último
     float precio;
@@ -22,26 +24,29 @@ struct introducirObjeto
 
 void main()
 {
-    struct introducirObjeto objeto1;
-    printf("Introduce new item description: \n");
+    do
+    {
+        struct item objeto1;
 
-    scanf("%s", objeto1.descripcionObjeto);
+        printf("Introduce new item description: \n");
 
-    printf("Introduce new item price: \n");
+        // scanf("%s", objeto1.descripcionObjeto);
+        fgets(objeto1.descripcionObjeto, 151, stdin);
 
-    scanf("%f", &objeto1.precio);
+        printf("Introduce new item price: \n");
 
-    printf("Introduce number of available new items: \n");
+        scanf("%f", &objeto1.precio);
 
-    scanf("%d", &objeto1.numeroItemsDisponibles);
+        printf("Introduce number of available new items: \n");
 
-    printf("%s %.2f %d", objeto1.descripcionObjeto, objeto1.precio, objeto1.numeroItemsDisponibles);
+        scanf("%d", &objeto1.numeroItemsDisponibles);
 
+        printf("%s %.2f %d", objeto1.descripcionObjeto, objeto1.precio, objeto1.numeroItemsDisponibles);
+
+        num++;
+
+    } while (num < 15);
+
+    // printf("%d", num);
     // Restriccion de 15 objetos totales en el almacen
-    /*
-        if (items >= 15)
-        {
-            printf("No more items allowed for sale in the store.");
-        };
-    */
 }
